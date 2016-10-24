@@ -14,6 +14,8 @@ var getWRTargetsForWeek = function(weekNumber){
 			console.log('getWRTargetsForWeek status - ', response.statusCode);
 			var $ = cheerio.load(body);
 			var arrayOfPlayers = [];
+			var objectOfPlayers = {};
+			var finalObj = {};
 
 			$('div.mod-table > table > tbody > tr').each(function( index ) {
 				var player = $(this).find('td.t_std_left.align-left > a').text().trim();
@@ -25,7 +27,7 @@ var getWRTargetsForWeek = function(weekNumber){
 				var targets = parseInt(children.eq(7).text().trim());
 				var catches = parseInt(children.eq(8).text().trim());
 				var fantasyPts = parseInt(children.eq(3).text().trim());
-				var ptsPerTarget = (fantasyPts / targets);
+				var pointsPerTarget = (fantasyPts / targets);
 				
 				var playerObj = {};
 				playerObj['playerName'] = playerName;
@@ -34,9 +36,14 @@ var getWRTargetsForWeek = function(weekNumber){
 				playerObj['targets'] = targets;
 				playerObj['catches'] = catches;
 				playerObj['fantasyPoints'] = fantasyPts;
-				playerObj['pointsPerTarget'] = ptsPerTarget;
+				playerObj['pointsPerTarget'] = pointsPerTarget;
+
+				objectOfPlayers[playerName] = playerObj;
 
 				arrayOfPlayers.push(playerObj);
+
+				finalObj['objectOfPlayers'] = objectOfPlayers;
+				finalObj['arrayOfPlayers'] = arrayOfPlayers;
 			});
 			// console.log('arrayOfPlayers - ', arrayOfPlayers[0]);
 			resolve(arrayOfPlayers);
