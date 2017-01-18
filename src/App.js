@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {receiverInfo} from './services/wr_targets';
+
+console.log('! - ', receiverInfo());
 
 class App extends Component {
   render() {

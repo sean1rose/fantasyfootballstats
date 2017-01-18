@@ -56,7 +56,7 @@ var getRbTouchesForWeek = function(weekNumber){
 			// console.log('arrayOfPlayers - ', arrayOfPlayers[0]);
 			// console.log('objectOfPlayers - ', objectOfPlayers['David Johnson']);
 			// console.log('finalObj - ', finalObj.objectOfPlayers['David Johnson']);
-			resolve(arrayOfPlayers);
+			resolve(finalObj);
 		});
 	})
 };

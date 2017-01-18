@@ -61,13 +61,13 @@ var getQBStatsForWeek = function(weekNumber){
 			});
 			// console.log('arrayOfPlayers - ', arrayOfPlayers[0]);
 			// console.log('objectOfPlayers - ', objectOfPlayers['David Johnson']);
-			console.log('finalObj - ', finalObj.objectOfPlayers['Tom Brady']);
-			resolve(arrayOfPlayers);
+			// console.log('finalObj - ', finalObj.objectOfPlayers['Tom Brady']);
+			resolve(finalObj);
 		});
 	})
 };
 
 getQBStatsForWeek(6)
 	.then(function(data){
-		// console.log('RB touches - ', data);
+		console.log('QB Stats - ', data);
 	});

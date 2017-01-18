@@ -2,11 +2,21 @@ var request = require('request');
 var cheerio = require('cheerio');
 var fs = require('fs');
 
-var getWRTargetsForWeek = function(weekNumber){
+function getWRTargetsForWeek (weekNumber) {
+
+	// return Promise
+
 	return new Promise(function(resolve, reject){
 		// use thehuddle.com stats tables
 		var finalUrl = 'http://thehuddle.com/stats/2016/plays_weekly.php?week=' + weekNumber + '&pos=wr&col=FPTS&ccs=1';
-		request(finalUrl, function(err, response, body) {
+		var options = {
+			url: finalUrl,
+			headers: {
+				'Origin': 'http://thehuddle.com'
+			}
+		}
+
+		request(options, function(err, response, body) {
 			// console.log('in request - ', body);
 			if (err){
 				console.log('error - ', err);
@@ -46,12 +56,14 @@ var getWRTargetsForWeek = function(weekNumber){
 				finalObj['arrayOfPlayers'] = arrayOfPlayers;
 			});
 			// console.log('arrayOfPlayers - ', arrayOfPlayers[0]);
-			resolve(arrayOfPlayers);
+			resolve(finalObj);
 		});
 	})
 };
 
-getWRTargetsForWeek(1)
-	.then(function(data){
-		console.log('wr targets - ', data);
-	});
+export function receiverInfo () {
+	getWRTargetsForWeek(1)
+		.then(function(data){
+			console.log('WR Targets - ', data);
+		});
+}
